@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eid ul Adha Mubarak — Sofiyan</title>
+<link href="https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --gold:#C9963A;--gold-l:#F0C96B;--gold-d:#8B6914;--gold-pale:#FDF0C0;
+  --green-d:#061810;--green-m:#0D2818;--green:#1A4A28;--green-l:#2E7D32;
+  --cream:#FDF6E3;--white:#FFFDF7;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--green-d);font-family:'Amiri',serif;cursor:none;overflow-x:hidden;}
+
+/* Cursor */
+#cur{width:14px;height:14px;background:var(--gold-l);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transition:transform .08s;box-shadow:0 0 16px var(--gold);}
+#cur2{width:7px;height:7px;background:var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;opacity:.5;transition:all .18s ease;}
+
+/* ============ HERO SECTION ============ */
+#hero{
+  position:relative;width:100vw;height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+#starCanvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;}
+
+.overlay-vignette{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at center,rgba(6,24,16,0) 35%,rgba(6,24,16,.75) 100%);
+  z-index:1;pointer-events:none;
+}
+
+/* Sofiyan name top */
+.sofiyan-name{
+  position:absolute;top:22px;left:50%;transform:translateX(-50%);
+  font-family:'Cinzel Decorative',cursive;
+  font-size:clamp(13px,2.2vw,22px);
+  letter-spacing:10px;color:var(--gold-l);
+  text-shadow:0 0 20px rgba(201,150,58,.8);
+  z-index:10;
+  animation:fadeDown .9s ease .1s both;
+  white-space:nowrap;
+}
+.sofiyan-name span{color:var(--gold);font-size:.8em;letter-spacing:4px;}
+
+/* Moon */
+.moon{position:absolute;top:55px;right:10%;z-index:3;pointer-events:none;animation:moonPulse 4s ease-in-out infinite alternate;}
+@keyframes moonPulse{0%{filter:drop-shadow(0 0 18px rgba(201,150,58,.5));}100%{filter:drop-shadow(0 0 55px rgba(240,201,107,1));}}
+
+/* Rope + Lanterns */
+.rope-svg{position:absolute;top:0;left:0;width:100%;z-index:4;pointer-events:none;}
+.lantern{position:absolute;top:-6px;z-index:5;transform-origin:top center;animation:swing 4s ease-in-out infinite;pointer-events:none;}
+.lantern:nth-child(odd){animation-direction:alternate;}
+@keyframes swing{0%,100%{transform:rotate(-7deg);}50%{transform:rotate(7deg);}}
+
+/* Hero text content */
+.hero-content{position:relative;z-index:6;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;}
+.arabic{font-family:'Amiri',serif;font-size:clamp(26px,4.5vw,58px);color:var(--gold-l);letter-spacing:4px;text-shadow:0 0 30px rgba(201,150,58,.7);animation:fadeUp 1s ease .5s both;}
+.big-title{
+  font-family: 'Philosopher', serif;font-weight:900;
+  font-size:clamp(28px,6vw,82px);line-height:1.05;letter-spacing:5px;
+  background:linear-gradient(135deg,#8B6914 0%,#F0C96B 35%,#fff8dc 50%,#F0C96B 65%,#8B6914 100%);
+  background-size:250% 250%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shimmer 4s ease infinite,fadeUp 1s ease .75s both;
+  filter:drop-shadow(0 4px 24px rgba(201,150,58,.4));
+}
+@keyframes shimmer{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+.tagline{font-family: 'Philosopher', seri;font-size:clamp(10px,1.5vw,16px);letter-spacing:9px;color:var(--gold);animation:fadeUp 1s ease 1s both;}
+.scroll-hint{
+  margin-top:20px;display:flex;flex-direction:column;align-items:center;gap:6px;
+  font-family:'Amiri',serif;font-size:13px;letter-spacing:3px;color:rgba(201,150,58,.6);
+  animation:fadeUp 1s ease 2s both;
+}
+.scroll-arrow{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s ease-in-out infinite;}
+@keyframes scrollPulse{0%,100%{opacity:.3;transform:translateY(-5px);}50%{opacity:1;transform:translateY(5px);}}
+
+/* Mosque bottom hero */
+.mosque-hero{position:absolute;bottom:0;left:0;right:0;z-index:4;pointer-events:none;}
+
+/* ============ BAKRA SECTION ============ */
+#bakra-section{
+  position:relative;background:var(--green-m);
+  padding:80px 20px;text-align:center;overflow:hidden;
+}
+.section-title{
+   font-family: 'Philosopher', serif;font-size:clamp(18px,3.5vw,42px);
+  color:var(--gold-l);letter-spacing:5px;margin-bottom:40px;
+  text-shadow:0 0 20px rgba(201,150,58,.4);
+}
+.bakra-wrap{display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap;}
+.bakra-svg-wrap{position:relative;animation:bakraFloat 3s ease-in-out infinite;}
+@keyframes bakraFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
+.bakra-shadow{width:180px;height:20px;background:rgba(0,0,0,.3);border-radius:50%;margin:0 auto;animation:shadowPulse 3s ease-in-out infinite;}
+@keyframes shadowPulse{0%,100%{transform:scaleX(1);opacity:.3;}50%{transform:scaleX(.7);opacity:.15;}}
+.bakra-desc{max-width:420px;text-align:left;}
+.bakra-desc h3{font-family: 'Philosopher', serif;font-size:clamp(14px,2.5vw,24px);color:var(--gold);margin-bottom:12px;}
+.bakra-desc p{font-family:'Amiri',serif;font-size:clamp(15px,1.8vw,20px);color:rgba(240,201,107,.8);line-height:2;font-style:italic;}
+.bakra-badge{
+  display:inline-block;margin-top:16px;
+  border:1px solid var(--gold);padding:8px 20px;border-radius:2px;
+ font-family: 'Philosopher', serif;font-size:12px;letter-spacing:4px;color:var(--gold-l);
+  background:rgba(201,150,58,.08);
+}
+
+/* Confetti qurbani particles */
+.qurbani-particles{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;}
+.qp{position:absolute;width:6px;height:6px;border-radius:1px;animation:qFall linear infinite;opacity:0;}
+@keyframes qFall{0%{transform:translateY(-20px) rotate(0deg);opacity:.8;}100%{transform:translateY(110vh) rotate(540deg);opacity:0;}}
+
+/* ============ WISHES SECTION ============ */
+#wishes{
+  background:linear-gradient(180deg,var(--green-m) 0%,var(--green-d) 100%);
+  padding:80px 20px;text-align:center;
+}
+.wish-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:24px;max-width:1000px;margin:0 auto 50px;
+}
+.wish-card{
+  border:1px solid rgba(201,150,58,.25);
+  padding:30px 24px;border-radius:4px;
+  background:rgba(26,74,40,.15);
+  backdrop-filter:blur(4px);
+  transition:transform .3s,border-color .3s,box-shadow .3s;
+  animation:fadeUp .8s ease both;
+}
+.wish-card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 8px 40px rgba(201,150,58,.15);}
+.wish-icon{font-size:36px;margin-bottom:12px;}
+.wish-card h4{font-family: 'Philosopher', serif;font-size:14px;letter-spacing:3px;color:var(--gold);margin-bottom:8px;}
+.wish-card p{font-family:'Amiri',serif;font-size:17px;color:rgba(240,201,107,.75);line-height:1.8;font-style:italic;}
+
+/* ============ DUA SECTION ============ */
+#dua-section{
+  background:var(--green-d);padding:80px 20px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.dua-box{
+  max-width:700px;margin:0 auto;
+  border:1px solid rgba(201,150,58,.3);
+  padding:50px 40px;border-radius:4px;
+  background:rgba(26,74,40,.1);
+  position:relative;
+}
+.dua-box::before,.dua-box::after{
+  content:'';position:absolute;
+  width:40px;height:40px;
+  border-color:var(--gold-l);border-style:solid;
+  opacity:.5;
+}
+.dua-box::before{top:12px;left:12px;border-width:1px 0 0 1px;}
+.dua-box::after{bottom:12px;right:12px;border-width:0 1px 1px 0;}
+.dua-arabic{
+  font-family:'Amiri',serif;font-size:clamp(24px,4vw,44px);
+  color:var(--gold-l);text-align:center;line-height:2;
+  text-shadow:0 0 20px rgba(201,150,58,.5);margin-bottom:20px;
+}
+.dua-translation{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:clamp(14px,1.8vw,18px);color:rgba(240,201,107,.7);
+  line-height:2;
+}
+.ornament-line{
+  display:flex;align-items:center;gap:12px;justify-content:center;margin:24px 0;
+}
+.ornament-line::before,.ornament-line::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,var(--gold-d),transparent);}
+
+/* ============ COUNTDOWN ============ */
+#countdown-section{
+  background:var(--green-m);padding:70px 20px;text-align:center;
+}
+.countdown-grid{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:30px;}
+.count-box{
+  background:rgba(201,150,58,.08);border:1px solid rgba(201,150,58,.3);
+  padding:24px 32px;border-radius:4px;min-width:90px;
+  transition:box-shadow .3s;
+}
+.count-box:hover{box-shadow:0 0 30px rgba(201,150,58,.2);}
+.count-num{ font-family: 'Philosopher', serif;font-size:clamp(28px,5vw,52px);color:var(--gold-l);display:block;line-height:1;}
+.count-label{font-family:'Amiri',serif;font-size:13px;letter-spacing:4px;color:var(--gold-d);margin-top:6px;display:block;}
+
+/* ============ TRADITIONS SECTION ============ */
+#traditions{
+  background:linear-gradient(180deg,var(--green-m) 0%,var(--green-d) 50%,var(--green-m) 100%);
+  padding:80px 20px;
+}
+.traditions-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;max-width:900px;margin:0 auto;
+}
+.trad-card{
+  text-align:center;padding:30px 16px;
+  border-bottom:2px solid rgba(201,150,58,.2);
+  transition:border-color .3s;
+}
+.trad-card:hover .trad-icon{transform:scale(1.15) rotate(5deg);}
+.trad-icon{font-size:44px;display:block;margin-bottom:14px;transition:transform .3s;}
+.trad-card h4{font-family: 'Philosopher', serif;font-size:12px;letter-spacing:3px;color:var(--gold);margin-bottom:8px;}
+.trad-card p{font-family:'Amiri',serif;font-size:16px;color:rgba(240,201,107,.7);line-height:1.8;}
+
+/* ============ FROM SOFIYAN SECTION ============ */
+#from-sofiyan{
+  background:var(--green-d);padding:80px 20px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.personal-card{
+  max-width:650px;margin:0 auto;
+  border:1px solid rgba(201,150,58,.35);
+  padding:50px 40px;
+  background:rgba(201,150,58,.04);
+  position:relative;
+}
+.personal-card .s-name{
+   font-family: 'Philosopher', serif;font-size:clamp(28px,5vw,56px);
+  background:linear-gradient(135deg,#8B6914,#F0C96B,#C9963A);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:6px;margin-bottom:20px;display:block;
+}
+.personal-card p{
+  font-family:'Amiri',serif;font-size:clamp(16px,2vw,22px);
+  color:rgba(240,201,107,.8);line-height:2.2;font-style:italic;
+}
+.signature{
+  margin-top:30px;font-family:'Playfair Display',serif;font-style:italic;
+  font-size:clamp(18px,3vw,28px);color:var(--gold);
+  text-shadow:0 0 20px rgba(201,150,58,.4);
+}
+
+/* ============ FOOTER ============ */
+footer{
+  background:var(--green-d);padding:30px 20px;text-align:center;
+  border-top:1px solid rgba(201,150,58,.15);
+}
+footer p{font-family:'Amiri',serif;font-size:14px;color:rgba(201,150,58,.5);letter-spacing:3px;}
+
+/* ============ SCROLL ANIMATIONS ============ */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+@keyframes fadeDown{from{opacity:0;transform:translate(-50%,-20px);}to{opacity:1;transform:translate(-50%,0);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+
+/* Geometric pattern BG */
+.geo-bg{
+  position:absolute;inset:0;pointer-events:none;opacity:.04;
+  background-image:repeating-linear-gradient(45deg,var(--gold) 0,var(--gold) 1px,transparent 0,transparent 50%);
+  background-size:28px 28px;
+}
+
+/* Particles container */
+#particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:3;overflow:hidden;}
+.particle{position:absolute;border-radius:50%;animation:floatUp linear infinite;opacity:0;}
+@keyframes floatUp{0%{transform:translateY(100vh);opacity:0;}10%{opacity:.8;}90%{opacity:.5;}100%{transform:translateY(-10vh);opacity:0;}}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur2"></div>
+<div id="particles"></div>
+<canvas id="starCanvas"></canvas>
+
+<!-- ========== HERO ========== -->
+<section id="hero">
+  <div class="overlay-vignette"></div>
+
+  <!-- Sofiyan name top center -->
+  <div class="sofiyan-name">✦ &nbsp; SOFIYAN &nbsp; ✦ <span>presents</span></div>
+
+  <!-- Moon top right -->
+  <div class="moon">
+    <svg width="100" height="100" viewBox="0 0 100 100">
+      <defs>
+        <radialGradient id="mg" cx="40%" cy="40%">
+          <stop offset="0%" stop-color="#FFF8DC"/>
+          <stop offset="55%" stop-color="#F0C96B"/>
+          <stop offset="100%" stop-color="#C9963A"/>
+        </radialGradient>
+      </defs>
+      <circle cx="50" cy="50" r="44" fill="rgba(201,150,58,.1)"/>
+      <circle cx="50" cy="50" r="34" fill="rgba(201,150,58,.06)"/>
+      <path d="M62 18 A32 32 0 1 0 62 82 A24 24 0 1 1 62 18Z" fill="url(#mg)"/>
+      <polygon points="78,24 80,31 87,31 81,36 83,43 78,38 73,43 75,36 69,31 76,31" fill="#F0C96B" opacity=".9"/>
+    </svg>
+  </div>
+
+  <!-- Rope SVG -->
+  <svg class="rope-svg" viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="height:70px;">
+    <path d="M0 18 Q180 55 360 18 Q540 -18 720 18 Q900 55 1080 18 Q1260 -18 1440 18" stroke="#8B6914" stroke-width="1.5" fill="none" opacity=".7"/>
+  </svg>
+
+  <!-- Lanterns -->
+  <div class="lantern" style="left:4%;animation-delay:0s;animation-duration:3.8s">
+    <svg width="36" height="66" viewBox="0 0 36 66"><line x1="18" y1="0" x2="18" y2="8" stroke="#8B6914" stroke-width="1.5"/><rect x="6" y="8" width="24" height="5" rx="2.5" fill="#C9963A"/><path d="M8 13 Q4 38 6 52 L30 52 Q32 38 28 13Z" fill="#0D2818" stroke="#C9963A" stroke-width="1"/><path d="M8 13 Q4 38 6 52 L30 52 Q32 38 28 13Z" fill="rgba(255,220,80,.18)"/><rect x="6" y="52" width="24" height="4" rx="2" fill="#C9963A"/><ellipse cx="18" cy="32" rx="6" ry="8" fill="rgba(255,230,100,.5)"/><line x1="9" y1="56" x2="8" y2="65" stroke="#C9963A" stroke-width="1"/><line x1="14" y1="56" x2="13" y2="65" stroke="#C9963A" stroke-width="1"/><line x1="18" y1="56" x2="18" y2="65" stroke="#C9963A" stroke-width="1"/><line x1="22" y1="56" x2="23" y2="65" stroke="#C9963A" stroke-width="1"/><line x1="27" y1="56" x2="28" y2="65" stroke="#C9963A" stroke-width="1"/></svg>
+  </div>
+  <div class="lantern" style="left:17%;animation-delay:.6s;animation-duration:4.3s">
+    <svg width="46" height="82" viewBox="0 0 46 82"><line x1="23" y1="0" x2="23" y2="10" stroke="#8B6914" stroke-width="1.5"/><rect x="8" y="10" width="30" height="6" rx="3" fill="#F0C96B"/><path d="M11 16 Q6 48 8 64 L38 64 Q40 48 35 16Z" fill="#061810" stroke="#F0C96B" stroke-width="1.2"/><path d="M11 16 Q6 48 8 64 L38 64 Q40 48 35 16Z" fill="rgba(255,225,80,.2)"/><rect x="8" y="64" width="30" height="5" rx="2.5" fill="#F0C96B"/><ellipse cx="23" cy="40" rx="8" ry="10" fill="rgba(255,235,120,.55)"/><line x1="11" y1="69" x2="10" y2="81" stroke="#F0C96B" stroke-width="1.2"/><line x1="17" y1="69" x2="16" y2="81" stroke="#F0C96B" stroke-width="1.2"/><line x1="23" y1="69" x2="23" y2="81" stroke="#F0C96B" stroke-width="1.2"/><line x1="29" y1="69" x2="30" y2="81" stroke="#F0C96B" stroke-width="1.2"/><line x1="35" y1="69" x2="36" y2="81" stroke="#F0C96B" stroke-width="1.2"/></svg>
+  </div>
+  <div class="lantern" style="left:50%;margin-left:-20px;animation-delay:.9s;animation-duration:4.6s">
+    <svg width="42" height="74" viewBox="0 0 42 74"><line x1="21" y1="0" x2="21" y2="9" stroke="#8B6914" stroke-width="1.5"/><rect x="7" y="9" width="28" height="5" rx="2.5" fill="#C9963A"/><path d="M9 14 Q5 42 7 57 L35 57 Q37 42 33 14Z" fill="#0D2818" stroke="#C9963A" stroke-width="1"/><path d="M9 14 Q5 42 7 57 L35 57 Q37 42 33 14Z" fill="rgba(255,215,60,.22)"/><rect x="7" y="57" width="28" height="5" rx="2.5" fill="#C9963A"/><ellipse cx="21" cy="35" rx="7" ry="9" fill="rgba(255,230,90,.6)"/><line x1="10" y1="62" x2="9" y2="73" stroke="#C9963A" stroke-width="1"/><line x1="16" y1="62" x2="15" y2="73" stroke="#C9963A" stroke-width="1"/><line x1="21" y1="62" x2="21" y2="73" stroke="#C9963A" stroke-width="1"/><line x1="26" y1="62" x2="27" y2="73" stroke="#C9963A" stroke-width="1"/><line x1="32" y1="62" x2="33" y2="73" stroke="#C9963A" stroke-width="1"/></svg>
+  </div>
+  <div class="lantern" style="left:75%;animation-delay:.3s;animation-duration:4s">
+    <svg width="46" height="82" viewBox="0 0 46 82"><line x1="23" y1="0" x2="23" y2="10" stroke="#8B6914" stroke-width="1.5"/><rect x="8" y="10" width="30" height="6" rx="3" fill="#C9963A"/><path d="M11 16 Q6 48 8 64 L38 64 Q40 48 35 16Z" fill="#061810" stroke="#C9963A" stroke-width="1.2"/><path d="M11 16 Q6 48 8 64 L38 64 Q40 48 35 16Z" fill="rgba(255,220,80,.18)"/><rect x="8" y="64" width="30" height="5" rx="2.5" fill="#C9963A"/><ellipse cx="23" cy="40" rx="8" ry="10" fill="rgba(255,225,100,.45)"/><line x1="11" y1="69" x2="10" y2="81" stroke="#C9963A" stroke-width="1.2"/><line x1="17" y1="69" x2="16" y2="81" stroke="#C9963A" stroke-width="1.2"/><line x1="23" y1="69" x2="23" y2="81" stroke="#C9963A" stroke-width="1.2"/><line x1="29" y1="69" x2="30" y2="81" stroke="#C9963A" stroke-width="1.2"/><line x1="35" y1="69" x2="36" y2="81" stroke="#C9963A" stroke-width="1.2"/></svg>
+  </div>
+  <div class="lantern" style="left:88%;animation-delay:1.2s;animation-duration:3.6s">
+    <svg width="36" height="66" viewBox="0 0 36 66"><line x1="18" y1="0" x2="18" y2="8" stroke="#8B6914" stroke-width="1.5"/><rect x="6" y="8" width="24" height="5" rx="2.5" fill="#C9963A"/><path d="M8 13 Q4 38 6 52 L30 52 Q32 38 28 13Z" fill="#0D2818" stroke="#C9963A" stroke-width="1"/><path d="M8 13 Q4 38 6 52 L30 52 Q32 38 28 13Z" fill="rgba(255,220,80,.18)"/><rect x="6" y="52" width="24" height="4" rx="2" fill="#C9963A"/><ellipse cx="18" cy="32" rx="6" ry="8" fill="rgba(255,230,100,.5)"/><line x1="9" y1="56" x2="8" y2="65" stroke="#C9963A" stroke-width="1"/><line x1="14" y1="56" x2="13" y2="65" stroke="#C9963A" stroke-width="1"/><line x1="18" y1="56" x2="18" y2="65" stroke="#C9963A" stroke-width="1"/><line x1="22" y1="56" x2="23" y2="65" stroke="#C9963A" stroke-width="1"/><line x1="27" y1="56" x2="28" y2="65" stroke="#C9963A" stroke-width="1"/></svg>
+  </div>
+
+  <!-- Hero text -->
+  <div class="hero-content">
+    <div class="countdown-grid" style="margin-bottom:20px;">
+  <div class="count-box"><span class="count-num" id="cd-d">00</span><span class="count-label">DAYS</span></div>
+  <div class="count-box"><span class="count-num" id="cd-h">--</span><span class="count-label">HOURS</span></div>
+  <div class="count-box"><span class="count-num" id="cd-m">--</span><span class="count-label">MINUTES</span></div>
+  <div class="count-box"><span class="count-num" id="cd-s">--</span><span class="count-label">SECONDS</span></div>
+</div>
+    <div class="arabic">عيد الأضحى مبارك</div>
+    <div class="big-title">EID UL ADHA<br>MUBARAK</div>
+    <div class="tagline">✦ &nbsp; TAQABBAL ALLAAHU MINNAA WA MINKUM &nbsp; ✦</div>
+    <div class="scroll-hint">
+      <span>SCROLL TO EXPLORE</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </div>
+
+  <!-- Mosque silhouette bottom of hero -->
+  <div class="mosque-hero">
+    <svg viewBox="0 0 1440 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="100%" height="200">
+      <defs>
+        <linearGradient id="mosq" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1A4A28"/>
+          <stop offset="100%" stop-color="#0D2818"/>
+        </linearGradient>
+      </defs>
+      <path d="M0 200 L0 155 L50 155 L50 135 L75 95 L85 135 L110 135 L110 155 L145 155 L145 115 L160 82 L175 115 L175 155 L215 155 L215 95 L235 55 L255 95 L255 155 L295 155 L325 78 C335 48 352 28 370 18 C388 8 408 6 428 6 C448 6 468 8 486 18 C504 28 521 48 531 78 L560 155 L595 155 L595 95 L615 55 L635 95 L635 155 L675 155 L675 115 L690 82 L705 115 L705 155 L745 155 L745 95 L765 55 L785 95 L785 155 L820 155 L850 78 C860 48 877 28 895 18 C913 8 933 6 953 6 C973 6 993 8 1011 18 C1029 28 1046 48 1056 78 L1085 155 L1120 155 L1120 95 L1140 55 L1160 95 L1160 155 L1195 155 L1195 115 L1210 82 L1225 115 L1225 155 L1265 155 L1265 95 L1285 55 L1305 95 L1305 155 L1330 155 L1330 135 L1355 95 L1365 135 L1390 135 L1390 155 L1440 155 L1440 200 Z" fill="url(#mosq)"/>
+      <!-- dome crescents -->
+      <path d="M414 12 A16 16 0 1 0 436 12 A11 11 0 1 1 414 12Z" fill="#C9963A" opacity=".9"/>
+      <path d="M939 12 A16 16 0 1 0 961 12 A11 11 0 1 1 939 12Z" fill="#C9963A" opacity=".9"/>
+      <!-- minaret tips -->
+      <polygon points="235,47 237,54 244,54 238,58 240,65 235,61 230,65 232,58 226,54 233,54" fill="#C9963A" opacity=".85"/>
+      <polygon points="615,47 617,54 624,54 618,58 620,65 615,61 610,65 612,58 606,54 613,54" fill="#C9963A" opacity=".85"/>
+      <polygon points="765,47 767,54 774,54 768,58 770,65 765,61 760,65 762,58 756,54 763,54" fill="#C9963A" opacity=".85"/>
+      <polygon points="1140,47 1142,54 1149,54 1143,58 1145,65 1140,61 1135,65 1137,58 1131,54 1138,54" fill="#C9963A" opacity=".85"/>
+      <!-- dome windows glow -->
+      <ellipse cx="390" cy="82" rx="6" ry="8" fill="rgba(240,201,107,.4)"/>
+      <ellipse cx="415" cy="76" rx="6" ry="8" fill="rgba(240,201,107,.45)"/>
+      <ellipse cx="440" cy="74" rx="7" ry="9" fill="rgba(240,201,107,.5)"/>
+      <ellipse cx="465" cy="76" rx="6" ry="8" fill="rgba(240,201,107,.45)"/>
+      <ellipse cx="490" cy="82" rx="6" ry="8" fill="rgba(240,201,107,.4)"/>
+      <ellipse cx="915" cy="82" rx="6" ry="8" fill="rgba(240,201,107,.4)"/>
+      <ellipse cx="940" cy="76" rx="6" ry="8" fill="rgba(240,201,107,.45)"/>
+      <ellipse cx="965" cy="74" rx="7" ry="9" fill="rgba(240,201,107,.5)"/>
+      <ellipse cx="990" cy="76" rx="6" ry="8" fill="rgba(240,201,107,.45)"/>
+      <ellipse cx="1015" cy="82" rx="6" ry="8" fill="rgba(240,201,107,.4)"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ========== BAKRA (GOAT) SECTION ========== -->
+<section id="bakra-section">
+  <div class="geo-bg"></div>
+  <div class="qurbani-particles" id="qp"></div>
+  <h2 class="section-title reveal">🐐 &nbsp; Qurbani ka Bakra &nbsp; 🐐</h2>
+  <div class="bakra-wrap reveal">
+    <!-- Animated Bakra SVG -->
+    <div>
+      <div class="bakra-svg-wrap">
+        <svg width="260" height="220" viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg">
+          <!-- Body -->
+          <ellipse cx="130" cy="145" rx="75" ry="52" fill="#F5F0E8" stroke="#C9963A" stroke-width="1.5"/>
+          <!-- Neck -->
+          <path d="M100 105 Q95 82 92 68 Q96 62 108 62 Q118 62 120 72 Q122 88 118 105Z" fill="#F5F0E8" stroke="#C9963A" stroke-width="1.2"/>
+          <!-- Head -->
+          <ellipse cx="100" cy="58" rx="26" ry="22" fill="#F5F0E8" stroke="#C9963A" stroke-width="1.5"/>
+          <!-- Snout / muzzle -->
+          <ellipse cx="80" cy="65" rx="16" ry="12" fill="#EDE4D0" stroke="#C9963A" stroke-width="1"/>
+          <!-- Nostrils -->
+          <ellipse cx="75" cy="67" rx="2.5" ry="1.8" fill="#C4956A"/>
+          <ellipse cx="84" cy="67" rx="2.5" ry="1.8" fill="#C4956A"/>
+          <!-- Eye -->
+          <circle cx="106" cy="52" r="5" fill="#2E1A0A"/>
+          <circle cx="107.5" cy="51" r="1.5" fill="white" opacity=".7"/>
+          <ellipse cx="106" cy="55" rx="5" ry="2" fill="#3D2010" opacity=".3"/>
+          <!-- Eyebrow -->
+          <path d="M101 47 Q106 44 112 47" stroke="#C4956A" stroke-width="1.2" fill="none"/>
+          <!-- Ear -->
+          <path d="M124 52 Q138 44 140 56 Q136 64 124 60Z" fill="#EDE4D0" stroke="#C9963A" stroke-width="1"/>
+          <path d="M126 54 Q135 48 136 57 Q133 62 126 59Z" fill="#DEB896" opacity=".5"/>
+          <!-- Horns -->
+          <path d="M110 40 Q108 22 116 16 Q121 24 118 38" fill="#C4956A" stroke="#8B6914" stroke-width="1"/>
+          <path d="M118 38 Q116 20 124 14 Q129 22 126 36" fill="#C4956A" stroke="#8B6914" stroke-width="1"/>
+          <!-- Flower/garland on neck -->
+          <circle cx="95" cy="82" r="5" fill="#C9963A" opacity=".8"/>
+          <circle cx="108" cy="78" r="4.5" fill="#F0C96B" opacity=".9"/>
+          <circle cx="120" cy="80" r="4" fill="#C9963A" opacity=".8"/>
+          <circle cx="95" cy="82" r="2" fill="#F0C96B"/>
+          <circle cx="108" cy="78" r="2" fill="#C9963A"/>
+          <circle cx="120" cy="80" r="2" fill="#F0C96B"/>
+          <!-- Legs -->
+          <rect x="85" y="188" width="14" height="28" rx="5" fill="#EDE4D0" stroke="#C9963A" stroke-width="1"/>
+          <rect x="104" y="188" width="14" height="28" rx="5" fill="#EDE4D0" stroke="#C9963A" stroke-width="1"/>
+          <rect x="148" y="188" width="14" height="28" rx="5" fill="#EDE4D0" stroke="#C9963A" stroke-width="1"/>
+          <rect x="167" y="188" width="14" height="28" rx="5" fill="#EDE4D0" stroke="#C9963A" stroke-width="1"/>
+          <!-- Hooves -->
+          <rect x="85" y="212" width="14" height="8" rx="3" fill="#8B6914"/>
+          <rect x="104" y="212" width="14" height="8" rx="3" fill="#8B6914"/>
+          <rect x="148" y="212" width="14" height="8" rx="3" fill="#8B6914"/>
+          <rect x="167" y="212" width="14" height="8" rx="3" fill="#8B6914"/>
+          <!-- Tail -->
+          <path d="M200 138 Q220 120 218 108 Q222 118 215 132 Q224 128 220 140 Q212 148 204 145Z" fill="#F0C96B" stroke="#C9963A" stroke-width="1"/>
+          <!-- Spots on body -->
+          <ellipse cx="145" cy="138" rx="18" ry="12" fill="rgba(201,150,58,.15)"/>
+          <ellipse cx="170" cy="155" rx="12" ry="8" fill="rgba(201,150,58,.12)"/>
+          <!-- Wool texture lines -->
+          <path d="M115 120 Q125 115 135 120 Q145 115 155 120" stroke="rgba(201,150,58,.25)" stroke-width="1.5" fill="none"/>
+          <path d="M110 132 Q125 127 140 132 Q155 127 170 132" stroke="rgba(201,150,58,.2)" stroke-width="1.5" fill="none"/>
+          <path d="M115 144 Q130 139 145 144 Q160 139 175 144" stroke="rgba(201,150,58,.2)" stroke-width="1.5" fill="none"/>
+          <!-- Bell on neck -->
+          <rect x="99" y="93" width="12" height="14" rx="2" fill="#C9963A"/>
+          <line x1="105" y1="107" x2="105" y2="111" stroke="#8B6914" stroke-width="1.5"/>
+          <ellipse cx="105" cy="111" rx="3" ry="2" fill="#8B6914"/>
+        </svg>
+      </div>
+      <div class="bakra-shadow"></div>
+    </div>
+    <!-- Description -->
+    <div class="bakra-desc">
+      <h3>Qurbani — The Sacred Sacrifice</h3>
+      <p>
+        Eid ul Adha mein hum Hazrat Ibrahim (AS) ki yaad mein<br>
+        qurbani karte hain — ek sunnat jo hume yad dilati hai<br>
+        ke Allah ki raza ke liye sab kuch karna chahiye.
+      </p>
+      <p style="margin-top:12px;">
+        "Teri qurbani ka gosht ya khoon Allah tak nahi pahuncha,<br>
+        lekin teri taqwa zaroor pahunchi."<br>
+        <span style="font-size:.85em;color:var(--gold-d);">— Surah Al-Hajj 22:37</span>
+      </p>
+      <div class="bakra-badge">🌙 &nbsp; QURBANI MUBARAK &nbsp; 🌙</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== WISHES SECTION ========== -->
+<section id="wishes">
+  <h2 class="section-title reveal">Eid ki Duaein</h2>
+  <div class="wish-grid">
+    <div class="wish-card reveal" style="animation-delay:.1s">
+      <div class="wish-icon">🕌</div>
+      <h4>Imaan</h4>
+      <p>May your faith grow stronger with every Eid that passes.</p>
+    </div>
+    <div class="wish-card reveal" style="animation-delay:.2s">
+      <div class="wish-icon">❤️</div>
+      <h4>Mohabbat</h4>
+      <p>May love and harmony fill your home and your heart.</p>
+    </div>
+    <div class="wish-card reveal" style="animation-delay:.3s">
+      <div class="wish-icon">💰</div>
+      <h4>Barkat</h4>
+      <p>May Allah shower endless blessings and rizq upon you.</p>
+    </div>
+    <div class="wish-card reveal" style="animation-delay:.4s">
+      <div class="wish-icon">🌿</div>
+      <h4>Sehat</h4>
+      <p>May you and your family be blessed with health and happiness.</p>
+    </div>
+    <div class="wish-card reveal" style="animation-delay:.5s">
+      <div class="wish-icon">🤲</div>
+      <h4>Qubuliyat</h4>
+      <p>May Allah accept your prayers, your Qurbani, and your deeds.</p>
+    </div>
+    <div class="wish-card reveal" style="animation-delay:.6s">
+      <div class="wish-icon">⭐</div>
+      <h4>Khushi</h4>
+      <p>May every moment of this Eid be filled with pure joy.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== DUA SECTION ========== -->
+<section id="dua-section">
+  <h2 class="section-title reveal">Eid ki Dua</h2>
+  <div class="dua-box reveal">
+    <div class="dua-arabic">تَقَبَّلَ اللَّهُ مِنَّا وَمِنْكُمْ</div>
+    <div class="ornament-line">✦</div>
+    <div class="dua-translation">
+      "Taqabbal Allaahu Minnaa wa Minkum"<br>
+      <em style="color:var(--gold-d)">May Allah accept (good deeds) from us and from you.</em>
+    </div>
+  </div>
+</section>
+
+<!-- ========== COUNTDOWN SECTION ========== -->
+
+
+<!-- ========== TRADITIONS SECTION ========== -->
+<section id="traditions">
+  <h2 class="section-title reveal">Eid ke Rasm-o-Rivaj</h2>
+  <div class="traditions-grid">
+    <div class="trad-card reveal">
+      <span class="trad-icon">🕌</span>
+      <h4>Eid ki Namaz</h4>
+      <p>Fajr ke baad Eid ki special namaaz padhi jaati hai, sabke saath mil kar.</p>
+    </div>
+    <div class="trad-card reveal" style="animation-delay:.15s">
+      <span class="trad-icon">🐑</span>
+      <h4>Qurbani</h4>
+      <p>Bakre, gaaye ya oont ki qurbani di jaati hai Allah ki khushi ke liye.</p>
+    </div>
+    <div class="trad-card reveal" style="animation-delay:.25s">
+      <span class="trad-icon">🍖</span>
+      <h4>Gosht ki Taqseem</h4>
+      <p>Gosht ke teen hisse — ghar, rishtedaar, aur garibon mein baanta jaata hai.</p>
+    </div>
+    <div class="trad-card reveal" style="animation-delay:.35s">
+      <span class="trad-icon">🎁</span>
+      <h4>Eidi</h4>
+      <p>Buzurg bacchon ko Eidi dete hain, mohabbat aur duaon ke saath.</p>
+    </div>
+    <div class="trad-card reveal" style="animation-delay:.45s">
+      <span class="trad-icon">🫂</span>
+      <h4>Gale Milna</h4>
+      <p>Rishtedaaron aur doston se milna, khushiyan baantna Eid ki ruh hai.</p>
+    </div>
+    <div class="trad-card reveal" style="animation-delay:.55s">
+      <span class="trad-icon">🍬</span>
+      <h4>Meethai</h4>
+      <p>Sewiyan, sheer khurma aur baklawa — Eid ki meethaas ka hissa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FROM SOFIYAN ========== -->
+<section id="from-sofiyan">
+  <div class="geo-bg"></div>
+  <h2 class="section-title reveal">Sofiyan ki Taraf Se</h2>
+  <div class="personal-card reveal">
+    <span class="s-name">SOFIYAN</span>
+    <p>
+      Aap sab ko Eid ul Adha Mubarak! 🌙<br><br>
+      Is mubarak mauqe par dua karta hoon ke Allah Taalah<br>
+      aap ki tamam duaein qubool farmaye, aap ke ghar mein<br>
+      khushi, barkat aur sehat bhari zindagi ata farmaye.<br><br>
+      Hazrat Ibrahim (AS) ki sunnat ko yad karte hue,<br>
+      apne dil mein qurbani ka jazba banaaye rakhein.
+    </p>
+    <div class="signature">— Sofiyan ✦ LEXO —</div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <p>🌙 &nbsp; EID UL ADHA MUBARAK 2026 &nbsp; • &nbsp; Made with ❤️ by SOFIYAN &nbsp; • &nbsp; LEXO &nbsp; 🌙</p>
+</footer>
+
+<script>
+// Cursor
+const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
+document.addEventListener('mousemove',e=>{
+  cur.style.left=e.clientX-7+'px';cur.style.top=e.clientY-7+'px';
+  setTimeout(()=>{cur2.style.left=e.clientX-3.5+'px';cur2.style.top=e.clientY-3.5+'px';},90);
+});
+
+// Stars on hero canvas
+const canvas=document.getElementById('starCanvas');
+const ctx=canvas.getContext('2d');
+function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+resizeCanvas();
+window.addEventListener('resize',resizeCanvas);
+const stars=Array.from({length:250},()=>({
+  x:Math.random()*canvas.width,
+  y:Math.random()*canvas.height*.7,
+  r:Math.random()*1.8+.3,
+  phase:Math.random()*Math.PI*2,
+  speed:Math.random()*.012+.004
+}));
+function drawStars(t){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  stars.forEach(s=>{
+    const a=.25+.75*Math.abs(Math.sin(t*s.speed+s.phase));
+    ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(240,201,107,${a})`;ctx.fill();
+  });
+  requestAnimationFrame(drawStars);
+}
+requestAnimationFrame(drawStars);
+
+// Floating gold particles
+const pc=document.getElementById('particles');
+for(let i=0;i<50;i++){
+  const p=document.createElement('div');
+  p.className='particle';
+  p.style.cssText=`
+    left:${Math.random()*100}vw;
+    width:${Math.random()*4+2}px;height:${Math.random()*4+2}px;
+    background:${Math.random()>.5?'#F0C96B':'#C9963A'};
+    border-radius:${Math.random()>.5?'0':'50%'};
+    animation-duration:${Math.random()*14+8}s;
+    animation-delay:${Math.random()*12}s;
+    transform:rotate(${Math.random()*360}deg);
+  `;
+  pc.appendChild(p);
+}
+
+// Qurbani falling petals/particles
+const qpContainer=document.getElementById('qp');
+const qColors=['#C9963A','#F0C96B','#8B6914','#2E7D32','#1A4A28'];
+for(let i=0;i<30;i++){
+  const p=document.createElement('div');
+  p.className='qp';
+  p.style.cssText=`
+    left:${Math.random()*100}%;
+    background:${qColors[Math.floor(Math.random()*qColors.length)]};
+    width:${Math.random()*8+4}px;height:${Math.random()*8+4}px;
+    border-radius:${Math.random()>.5?'50%':'2px'};
+    animation-duration:${Math.random()*8+5}s;
+    animation-delay:${Math.random()*8}s;
+  `;
+  qpContainer.appendChild(p);
+}
+
+// Scroll reveal
+const revealEls=document.querySelectorAll('.reveal');
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}});
+},{threshold:.12});
+revealEls.forEach(el=>io.observe(el));
+
+// Countdown to Eid ul Adha 2025 (June 6)
+function updateCountdown(){
+  const eid=new Date('2025-06-06T00:00:00');
+  const now=new Date();
+  let diff=eid-now;
+  if(diff<0){
+    document.getElementById('cd-d').textContent='EID';
+    document.getElementById('cd-h').textContent='MU';
+    document.getElementById('cd-m').textContent='BA';
+    document.getElementById('cd-s').textContent='RAK';
+    return;
+  }
+  const d=Math.floor(diff/864e5);
+  diff-=d*864e5;
+  const h=Math.floor(diff/36e5);
+  diff-=h*36e5;
+  const m=Math.floor(diff/6e4);
+  const s=Math.floor((diff%6e4)/1e3);
+  document.getElementById('cd-d').textContent=String(d).padStart(2,'0');
+  document.getElementById('cd-h').textContent=String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent=String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent=String(s).padStart(2,'0');
+}
+function updateCountdown(){
+  const now = new Date();
+  // Kal ka date — same date +1 day, midnight 00:00:00
+  const tomorrow = new Date(now);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  tomorrow.setHours(0, 0, 0, 0);
+  
+  let diff = tomorrow - now;
+  
+  const h = Math.floor(diff / 36e5);
+  diff -= h * 36e5;
+  const m = Math.floor(diff / 6e4);
+  const s = Math.floor((diff % 6e4) / 1e3);
+  
+  document.getElementById('cd-d').textContent = '00';
+  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+setInterval(updateCountdown,1000);
+</script>
+</body>
+</html>
